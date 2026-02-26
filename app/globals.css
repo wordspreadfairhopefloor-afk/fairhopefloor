@@ -22,5 +22,28 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Prefer Helvetica Neue where available; fall back to system fonts. */
+  font-family: "Helvetica Neue", Helvetica, Arial, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif;
+}
+
+/* Scroll wheel animation and helpers */
+:root {
+  --scroll-duration: 15s;
+  --scroll-distance: calc(-40vh * 5); /* default for 5 items */
+}
+
+@keyframes scroll-wheel {
+  from { transform: translateY(0); }
+  to { transform: translateY(var(--scroll-distance)); }
+}
+
+.scroll-strip {
+  animation: scroll-wheel var(--scroll-duration) linear infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-strip {
+    animation: none;
+  }
 }
